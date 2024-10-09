@@ -1,30 +1,30 @@
 <div class="w-screen h-screen">
     <div class="flex flex-col justify-center items-center h-full ">
-    <p class="font-bold text-md mb-4">Admin login</p>
+    <p class="font-bold text-md mb-4">Manager login</p>
     <div>
         <form class="max-w-md mx-auto" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
             <div class="mb-5">
                 <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
-                    email Eg:admin{{'@'}}gmail.com</label>
+                    email</label>
                 <input type="email" id="email" formControlName="email" name="email"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="name@gmail.com" required />
-                    @if (loginForm.get('email')?.touched && (loginForm.get('email')?.hasError("required") || loginForm.get('email')?.hasError("email"))) {
+                    <!-- @if (loginForm.get('email')?.touched && (loginForm.get('email')?.hasError("required") || loginForm.get('email')?.hasError("email"))) {
                         <p class="text-red-700 text-sm">Invalid Email</p>
-                    }
+                    } -->
             </div>
             <div class="mb-5">
-                <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" >Your
-                    password Eg:123</label>
+                <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
+                    password</label>
                 <input type="password" id="password" formControlName="password" name="password"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required />
-                    @if (loginForm.get('password')?.touched && loginForm.get('password')?.hasError("required")) {
+                    <!-- @if (loginForm.get('password')?.touched && loginForm.get('password')?.hasError("required")) {
                         <p class="text-red-700 text-sm">Password Required</p>
                     }
                     @if (loginError) {
                         <p class="text-red-700 text-sm">{{loginError}}</p>
-                    }
+                    } -->
             </div>
             <div class="flex items-start mb-5">
                 <div class="flex items-center h-5">

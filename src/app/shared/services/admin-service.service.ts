@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IUserLogin } from '../../models/userModel';
+import { IUser, IUserLogin } from '../../models/userModel';
 import { Observable } from 'rxjs';
 import { IResponse } from '../../models/responseModel';
 
@@ -14,4 +14,17 @@ export class AdminServiceService {
   adminlogin(data:IUserLogin):Observable<IResponse<string>>{
     return this.http.post<IResponse<string>>(`${this.baseURL}/login`,data)
   }
+
+  addUser(data: IUser):Observable<IResponse<string>>{
+    return this.http.post<IResponse<string>>(`${this.baseURL}/addUser`,data)
+  }
+
+  editUser(data: IUser):Observable<IResponse<string>>{
+    return this.http.put<IResponse<string>>(`${this.baseURL}/editUser`,data)
+  }
+
+  getUsers(){
+    return this.http.get<IResponse<IUser[]>>(`${this.baseURL}/users`)
+  }
+
 }
