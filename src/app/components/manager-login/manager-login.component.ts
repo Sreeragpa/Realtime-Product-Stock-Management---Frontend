@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ManagerService } from '../../shared/services/manager.service';
 import { Router } from '@angular/router';
+import { MessageBundle } from '@angular/compiler';
 
 @Component({
   selector: 'app-manager-login',
@@ -25,15 +26,22 @@ export class ManagerLoginComponent {
     if(this.loginForm.valid){
       this.managerService.login(this.loginForm.value).subscribe({
         next:(res)=>{
-          localStorage.setItem('Managertoken',res.data);
+          localStorage.setItem('managerToken',res.data);
           this.router.navigate(['manager/dashboard'])
         },
         error:(err)=>{
-          this.loginError = err.error as string
+          this.setError(err.error)
         }
       })
     }else{
       this.loginForm.markAllAsTouched()
     }
+  }
+
+  setError(message: string){
+    this.loginError = message;
+    setTimeout(()=>{
+      this.loginError = ""
+    },4000)
   }
 }

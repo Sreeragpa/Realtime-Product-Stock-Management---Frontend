@@ -4,11 +4,13 @@ import { ManagerLoginComponent } from './components/manager-login/manager-login.
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { adminDashGuard } from './core/guard/admin-dash.guard';
 import { ManagerDashboardComponent } from './components/manager-dashboard/manager-dashboard.component';
+import { managerGuard } from './core/guard/manager.guard';
 
 export const routes: Routes = [
     {path:"",redirectTo:"/admin/login",pathMatch:'full'},
+    {path:"admin",redirectTo:"/admin/dashboard",pathMatch:'full'},
     {path:"admin/login",component:AdminLoginComponent},
     {path:"admin/dashboard",component:AdminDashboardComponent,canActivate:[adminDashGuard]},
     {path:"manager/login",component:ManagerLoginComponent},
-    {path:"manager/dashboard",component:ManagerDashboardComponent},
+    {path:"manager/dashboard",component:ManagerDashboardComponent,canActivate:[managerGuard]},
 ];

@@ -1,75 +1,19 @@
 <div class="w-screen">
     <div class="flex bg-black h-14 text-white font-bold items-center p-3 justify-between">
         <div>Manager Dashboard</div>
-        <div class="cursor-pointer" (click)="logOut()">Logout</div>
+        <div class="cursor-pointer" (click)="logout()">Logout</div>
     </div>
     <div class="flex flex-col gap-4 m-5">
         <div>
             <button #toggleButton data-modal-target="crud-modal" data-modal-toggle="crud-modal"
                 class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                type="button">Add Item</button>
+                type="button">Add Product</button>
 
-
-
+            <app-item-form [formType]="itemFormType.add" (addProductEvent)="pushNewProduct($event)"></app-item-form>
             <!-- Main modal -->
-            <div id="crud-modal" tabindex="-1" aria-hidden="true"   
-                class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                <div class="relative p-4 w-full max-w-md max-h-full">
-                    <!-- Modal content -->
-                    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                        <!-- Modal header -->
-                        <div
-                            class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                                Edit Manager
-                            </h3>
-                            <button type="button"
-                                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                                data-modal-toggle="crud-modal">
-                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                    viewBox="0 0 14 14">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                                </svg>
-                                <span class="sr-only">Close modal</span>
-                            </button>
-                        </div>
-                        <!-- Modal body -->
-                        <!-- <app-user-form [formType]="'add'"></app-user-form> -->
-                    </div>
-                </div>
-            </div>
 
 
-          @if (isEditActive) {
-            <div id="crud-modal2" tabindex="-1" aria-hidden="true"
-            class="flex overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-            <div class="relative p-4 w-full max-w-md max-h-full">
-                <!-- Modal content -->
-                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                    <!-- Modal header -->
-                    <div
-                        class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                            Edit Manager
-                        </h3>
-                        <button type="button"
-                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                            data-modal-toggle="crud-modal">
-                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                viewBox="0 0 14 14">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                            </svg>
-                            <span class="sr-only">Close modal</span>
-                        </button>
-                    </div>
-                    <!-- Modal body -->
-                   
-                </div>
-            </div>
-        </div>
-          }
+
 
         </div>
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -77,34 +21,41 @@
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         <th scope="col" class="px-6 py-3">
-                            S.No
+                            Name
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Code No
+                            Price
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Material
+                            Category
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Size
+                            Quantity
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Qty
+                            Actions
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                @for (item of items; track item._id) {
+                @for (product of products; track $index) {
                     <tr
                     class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                       {{item.email}}
+                       {{product.name}}
                     </th>
                     <td class="px-6 py-4">
-                        {{item.role}}
+                        {{product.price}}
                     </td>
                     <td class="px-6 py-4">
-                        <div  class="font-medium text-blue-600 dark:text-blue-500 hover:underline cursor-pointer" (click)="editUser(item)">Edit</div>
+                        {{product.category}}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{product.quantity}}
+                    </td>
+                    <td class="flex gap-2 px-6 py-4">
+                        <div  class="font-medium text-blue-600 dark:text-blue-500 hover:underline cursor-pointer" (click)="editUser(product)">Edit</div>
+                        <div  class="font-medium text-red-500 dark:text-blue-500 hover:underline cursor-pointer" (click)="deleteProduct(product._id)">Delete</div>
                     </td>
                 </tr>
                 }
