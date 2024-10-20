@@ -5,6 +5,8 @@ import { AdminDashboardComponent } from './components/admin-dashboard/admin-dash
 import { adminDashGuard } from './core/guard/admin-dash.guard';
 import { ManagerDashboardComponent } from './components/manager-dashboard/manager-dashboard.component';
 import { managerGuard } from './core/guard/manager.guard';
+import { StoremanagerLoginComponent } from './components/storemanager-login/storemanager-login.component';
+import { StoremanagerDashboardComponent } from './components/storemanager-dashboard/storemanager-dashboard.component';
 
 export const routes: Routes = [
     {path:"",redirectTo:"/admin/login",pathMatch:'full'},
@@ -13,4 +15,7 @@ export const routes: Routes = [
     {path:"admin/dashboard",component:AdminDashboardComponent,canActivate:[adminDashGuard]},
     {path:"manager/login",component:ManagerLoginComponent},
     {path:"manager/dashboard",component:ManagerDashboardComponent,canActivate:[managerGuard]},
+    {path:"storemanager/login",component:StoremanagerLoginComponent},
+    {path:"storemanager/dashboard",component:StoremanagerDashboardComponent},
+
 ];

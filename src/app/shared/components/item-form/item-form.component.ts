@@ -35,6 +35,10 @@ export class  ItemFormComponent {
   }
 
   openModal(){
+    console.log("kokokok");
+    console.log(this.openButton.nativeElement);
+    
+    
     this.openButton.nativeElement.click()
   }
 
@@ -44,7 +48,7 @@ export class  ItemFormComponent {
       this.productService.addProduct(this.productForm.value).subscribe({
         next:(res)=>{
           console.log(res);
-          this.addProductEvent.emit(res.data);
+          // this.addProductEvent.emit(res.data);  not needed ,since socketio take care of this
           this.closeModal()
         },
         error:(err)=>{

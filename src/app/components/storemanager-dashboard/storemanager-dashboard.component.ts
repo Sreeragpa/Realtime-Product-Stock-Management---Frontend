@@ -1,42 +1,33 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ViewChild } from '@angular/core';
 import { ItemFormComponent } from '../../shared/components/item-form/item-form.component';
-import { itemForm } from '../../shared/enums/formTypes';
 import { ProductService } from '../../shared/services/product.service';
 import { IProduct } from '../../models/productModel';
-import { Router } from '@angular/router';
 import { ProductTableComponent } from "../../shared/components/product-table/product-table.component";
+import { itemForm } from '../../shared/enums/formTypes';
+import { Router } from '@angular/router';
 import { SocketioService } from '../../shared/services/socketio.service';
 
 @Component({
-  selector: 'app-manager-dashboard',
+  selector: 'app-storemanager-dashboard',
   standalone: true,
   imports: [ItemFormComponent, ProductTableComponent],
-  templateUrl: './manager-dashboard.component.html',
-  styleUrl: './manager-dashboard.component.css',
+  templateUrl: './storemanager-dashboard.component.html',
+  styleUrl: './storemanager-dashboard.component.css',
 })
-export class ManagerDashboardComponent {
-  private productService = inject(ProductService);
-  products: IProduct[] = []
-  private router = inject(Router);
-  private socketio = inject(SocketioService)
- 
+export class StoremanagerDashboardComponent {
   itemFormType = itemForm
-
-  items: any;
+  products: IProduct[] = []
+  private productService = inject(ProductService)
+  private router = inject(Router)
+  private socketio = inject(SocketioService)
+  @ViewChild(ItemFormComponent) itemformComponent!: ItemFormComponent
 
   ngOnInit() {
     this.productService.getProducts().subscribe({
-      next:(res)=>{
-        this.products = res.data
-      }
-    })
-
-    this.socketio.on("connection").subscribe({
-      next:(res)=>{
-        console.log("connected");
-        console.log(res);
-      }
-    })
+      next: (res) => {
+        this.products = res.data;
+      },
+    });
 
     this.socketio.on<IProduct>("product-added").subscribe({
       next:(res)=>{
@@ -61,12 +52,15 @@ export class ManagerDashboardComponent {
     })
   }
 
-  logout(){
-    localStorage.removeItem("managerToken");
-    this.router.navigate(['manager/login'])
+
+  logout() {
+    localStorage.removeItem("storemanagerToken");
+    this.router.navigate(["storemanager/login"])
   }
 
-  editUser(_t21: any) {
-    throw new Error('Method not implemented.');
+  openModal(){
+    console.log("Hiiii");
+    
+    this.itemformComponent.openModal()
   }
 }
